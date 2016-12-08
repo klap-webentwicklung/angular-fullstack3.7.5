@@ -105,10 +105,12 @@ export function changePassword(req, res, next) {
 export function updateUser(req, res, next) {
   var userId = req.user._id;
   var firstname = String(req.body.firstname);
+  var name = String(req.body.name);
 
   return User.findById(userId).exec()
     .then(user => {
       user.firstname = firstname;
+      user.name = name;
       return user.save()
         .then(() => {
           res.status(204).end();

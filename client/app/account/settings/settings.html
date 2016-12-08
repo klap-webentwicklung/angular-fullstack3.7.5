@@ -11,12 +11,22 @@
         <div class="form-group">
           <label>Firstname</label>
 
-          <input type="text" name="firstname" class="form-control" ng-model="vm.user.firstname"
+          <input type="text" name="firstname" class="form-control" ng-model="vm.user.firstname" ng-minlength="3" />
+          <p class="help-block"
+             ng-show="(form1.firstname.$error.minlength) && (form1.firstname.$dirty || vm.submitted)">
+            Firstname must be at least 3 characters.
+          </p>
+        </div>
+
+                <div class="form-group">
+          <label>Name</label>
+
+          <input type="text" name="name" class="form-control" ng-model="vm.user.name"
                  ng-minlength="3"
                  required/>
           <p class="help-block"
-             ng-show="(form1.firstname.$error.minlength || form1.firstname.$error.required) && (form1.firstname.$dirty || vm.submitted)">
-            Firstname must be at least 3 characters.
+             ng-show="(form1.name.$error.minlength || form1.name.$error.required) && (form1.name.$dirty || vm.submitted)">
+            Name must be at least 3 characters.
           </p>
         </div>
 

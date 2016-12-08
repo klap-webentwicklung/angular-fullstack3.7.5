@@ -93,18 +93,15 @@
           .$promise;
       },
 
-            /**
+      /**
        * Update user
-       *
-       * @param  {String}   firstname
-       * @param  {Function} callback    - optional, function(error, user)
-       * @return {Promise}
        */
-      updateUser(firstname, callback) {
+      updateUser(firstname, name, callback) {
         return User.updateUser({
             id: currentUser._id
           }, {
-            firstname: firstname
+            firstname: firstname,
+            name: name
           }, function() {
             return safeCb(callback)(null);
           }, function(err) {

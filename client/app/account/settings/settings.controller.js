@@ -6,6 +6,9 @@ class SettingsController {
 
   constructor(Auth) {
     this.Auth = Auth;
+    this.currentUser = Auth.getCurrentUser();
+    this.user = this.currentUser;
+    console.log('Current User', this.currentUser);
   }
 
   changePassword(form) {
@@ -30,7 +33,7 @@ updateUser(form1) {
 
     if (form1.$valid) {
       console.log('update user triggered');
-      this.Auth.updateUser(this.user.firstname)
+      this.Auth.updateUser(this.user.firstname, this.user.name)
         .then(() => {
           this.message = 'User updated successfully.';
         })
