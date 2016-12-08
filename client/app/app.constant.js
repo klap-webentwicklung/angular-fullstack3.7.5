@@ -5,6 +5,7 @@
 	"userRoles": [
 		"guest",
 		"user",
+		"auther",
 		"admin"
 	]
 })
