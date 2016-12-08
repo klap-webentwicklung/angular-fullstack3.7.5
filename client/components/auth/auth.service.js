@@ -93,6 +93,26 @@
           .$promise;
       },
 
+            /**
+       * Update user
+       *
+       * @param  {String}   firstname
+       * @param  {Function} callback    - optional, function(error, user)
+       * @return {Promise}
+       */
+      updateUser(firstname, callback) {
+        return User.updateUser({
+            id: currentUser._id
+          }, {
+            firstname: firstname
+          }, function() {
+            return safeCb(callback)(null);
+          }, function(err) {
+            return safeCb(callback)(err);
+          })
+          .$promise;
+      },
+
       /**
        * Gets all available info on a user
        *   (synchronous|asynchronous)

@@ -23,6 +23,22 @@ class SettingsController {
         });
     }
   }
+
+
+updateUser(form1) {
+    this.submitted = true;
+
+    if (form1.$valid) {
+      console.log('update user triggered');
+      this.Auth.updateUser(this.user.firstname)
+        .then(() => {
+          this.message = 'User updated successfully.';
+        })
+        .catch(() => {
+          this.message = 'something went wrong';
+        });
+    }
+  }
 }
 
 angular.module('weindbApp')
