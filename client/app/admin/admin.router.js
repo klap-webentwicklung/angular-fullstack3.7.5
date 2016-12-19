@@ -8,5 +8,12 @@ angular.module('weindbApp.admin')
       controller: 'AdminController',
       controllerAs: 'admin',
       authenticate: 'admin'
+    })
+
+    $stateProvider.state('detailadmin', {
+    	url: '/detailadmin/:id',
+    	templateUrl: 'app/admin/detailadmin.html',
+    	controllerAs: 'detailadmin',
+    	authenticate: 'admin'
     });
   });

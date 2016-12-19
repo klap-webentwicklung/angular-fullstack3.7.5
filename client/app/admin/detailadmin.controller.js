@@ -2,23 +2,17 @@
 
 (function() {
 
-  class AdminController {
-    constructor(User, Auth, $location) {
+  class DetailAdminController {
+    constructor(User, Auth) {
       // Use the User $resource to fetch all users
       this.users = User.query();
       this.Auth = Auth;
       this.submitted = false;
-      this.$location = $location;
     }
 
     delete(user) {
       user.$remove();
       this.users.splice(this.users.indexOf(user), 1);
-    }
-
-    goDetails(user) {
-      console.log('goDetails has triggered');
-      this.$location.path('/detailadmin/' + user._id);
     }
   
 
@@ -39,6 +33,6 @@
 
   }
 
-  angular.module('weindbApp.admin')
-    .controller('AdminController', AdminController);
+  angular.module('weindbApp.detailadmin')
+    .controller('AdminController', DetailAdminController);
 })();
