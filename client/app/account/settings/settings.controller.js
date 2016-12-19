@@ -8,6 +8,7 @@ class SettingsController {
     this.Auth = Auth;
     this.currentUser = Auth.getCurrentUser();
     this.user = this.currentUser;
+    this.user.firstname  = '';
     console.log('Current User', this.currentUser);
   }
 
@@ -33,7 +34,7 @@ updateUser(form1) {
 
     if (form1.$valid) {
       console.log('update user triggered');
-      this.Auth.updateUser(this.user.firstname, this.user.name)
+      this.Auth.updateUser(this.user.firstname, this.user.name, this.user.role)
         .then(() => {
           this.message = 'User updated successfully.';
         })
