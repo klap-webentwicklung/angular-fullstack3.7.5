@@ -1,7 +1,17 @@
 <div class="container">
 	<section class="row">
 		<article class="col-lg-12">
-			<h1>User Administration</h1>
+			<h1>Administration of User {{detailadmin.user.name}}</h1>
 		</article>
 	</section>
+	      <form class="form" name="form1" ng-submit="detailadmin.updateUser(form1)" novalidate>
+        <div class="form-group">
+                    <label>Role</label>
+                    <input type="text" name="role" class="form-control" ng-model="detailadmin.user.role" ng-minlength="3" required/>
+                    <p class="help-block" ng-show="(form1.role.$error.minlength || form1.role.$error.required) && (form1.role.$dirty || submitted)">
+                        Rame must be at least 3 characters.
+                    </p>
+                </div>
+                <button class="btn btn-lg btn-primary" type="submit">Save changes</button>
+      </form>
 </div>
