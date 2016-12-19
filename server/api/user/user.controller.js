@@ -103,14 +103,17 @@ export function changePassword(req, res, next) {
  * update User
  */
 export function updateUser(req, res, next) {
-  var userId = req.user._id;
+  var userId = String(req.body._id);
+  // var userId = req.user._id;
   var firstname = String(req.body.firstname);
+  console.log('firstname from the back', firstname);
   var name = String(req.body.name);
   var role = String(req.body.role);
 
   return User.findById(userId).exec()
     .then(user => {
       user.firstname = firstname;
+      console.log('firstname from the back', firstname);
       user.name = name;
       user.role = role;
       return user.save()

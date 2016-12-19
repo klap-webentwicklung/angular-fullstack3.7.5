@@ -96,13 +96,16 @@
       /**
        * Update user
        */
-      updateUser(firstname, name, role, callback) {
+      updateUser(firstname, name, role, id, callback) {
+        console.log('Id from auth: ', id);
         return User.updateUser({
-            id: currentUser._id
+            // id: id
+            // id: currentUser._id
           }, {
             firstname: firstname,
             role: role,
-            name: name
+            name: name,
+            _id: id
           }, function() {
             return safeCb(callback)(null);
           }, function(err) {
