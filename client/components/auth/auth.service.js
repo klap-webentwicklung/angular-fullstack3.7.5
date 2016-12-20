@@ -96,16 +96,12 @@
       /**
        * Update user
        */
-      updateUser(firstname, name, role, id, callback) {
-        console.log('Id from auth: ', id);
+      updateUser(firstname, name, callback) {
         return User.updateUser({
-            // id: id
-            // id: currentUser._id
+            id: currentUser._id
           }, {
             firstname: firstname,
-            role: role,
             name: name,
-            _id: id
           }, function() {
             return safeCb(callback)(null);
           }, function(err) {
@@ -117,13 +113,12 @@
       /**
        * Update user role
        */
-      updateUserRole(firstname, name, role, id, callback) {
-        console.log('Id from auth: ', id);
+      updateUserRole(role, id, callback) {
         return User.updateUserRole({
           }, {
-            firstname: firstname,
+            // firstname: firstname,
             role: role,
-            name: name,
+            // name: name,
             _id: id
           }, function() {
             return safeCb(callback)(null);
