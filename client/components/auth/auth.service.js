@@ -115,6 +115,25 @@
       },
 
       /**
+       * Update user role
+       */
+      updateUserRole(firstname, name, role, id, callback) {
+        console.log('Id from auth: ', id);
+        return User.updateUserRole({
+          }, {
+            firstname: firstname,
+            role: role,
+            name: name,
+            _id: id
+          }, function() {
+            return safeCb(callback)(null);
+          }, function(err) {
+            return safeCb(callback)(err);
+          })
+          .$promise;
+      },
+
+      /**
        * Gets all available info on a user
        *   (synchronous|asynchronous)
        *

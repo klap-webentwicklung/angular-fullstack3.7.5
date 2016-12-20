@@ -15,6 +15,12 @@
       updateUser: {
         method: 'PUT'
       },
+      updateUserRole: {
+        method: 'PUT',
+        params: {
+          controller: 'role'
+        }
+      },
       get: {
         method: 'GET',
         params: {

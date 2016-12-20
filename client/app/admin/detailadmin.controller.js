@@ -28,7 +28,7 @@
 
             if (form1.$valid) {
                 console.log('update user triggered');
-                this.Auth.updateUser(this.user.firstname, this.user.name, this.user.role, this.user._id)
+                this.Auth.updateUserRole(this.user.firstname, this.user.name, this.user.role, this.user._id)
                     .then(() => {
                         this.message = 'User updated successfully.';
                     })
