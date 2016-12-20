@@ -17,6 +17,7 @@
       },
       updateUserRole: {
         method: 'PUT',
+        // specifie param to hit the right PUT route
         params: {
           controller: 'role'
         }

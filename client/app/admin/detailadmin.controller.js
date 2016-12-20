@@ -4,22 +4,18 @@
 
     class DetailAdminController {
         constructor(User, Auth, $http, $state) {
-            // Use the User $resource to fetch all users
-            // this.users = User.query();
+
             this.Auth = Auth;
-            this.currentUser  = Auth.getCurrentUser();
-            console.log('Current User', this.currentUser);
             this.$http = $http;
             this.$state = $state;
+            // grab the state-params from url
             this.params = this.$state.params.id;
-            console.log('Params: ', this.params);
-            // this.submitted = false;
             // get single user 
             this.$http.get('/api/users/' + this.params)
                 .then(response => {
                     this.user = response.data;
+                    // add id to the user obj
                     this.user._id = this.params;
-                    console.log('single User: ', this.user);
                 });
         }
 
@@ -27,7 +23,6 @@
             this.submitted = true;
 
             if (form1.$valid) {
-                console.log('update user triggered');
                 this.Auth.updateUserRole(this.user.role, this.user._id)
                     .then(() => {
                         this.message = 'User updated successfully.';

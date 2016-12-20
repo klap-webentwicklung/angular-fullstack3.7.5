@@ -4,18 +4,11 @@
     <li class="list-group-item" ng-repeat="user in admin.users">
 	    <div class="user-info">
 	        <a href="#" ng-click="admin.goDetails(user)"><strong>{{user.name}}</strong></a><br>
-	        <span class="text-muted">{{user.email}}</span>
+          <span class="text-muted">{{user.email}}</span><br>
+	        <span class="text-muted">{{user.role}}</span>
+
 	    </div>
-      <form class="form" name="form1" ng-submit="admin.updateUser(form1, user)" novalidate>
-        <div class="form-group">
-                    <label>Role</label>
-                    <input type="text" name="role" class="form-control" ng-model="user.role" ng-minlength="3" required/>
-                    <p class="help-block" ng-show="(form1.role.$error.minlength || form1.role.$error.required) && (form1.role.$dirty || submitted)">
-                        Rame must be at least 3 characters.
-                    </p>
-                </div>
-                <button class="btn btn-lg btn-primary" type="submit">Save changes</button>
-      </form>
+
         <a ng-click="admin.delete(user)" class="trash"><span class="fa fa-trash fa-2x"></span></a>
     </li>
   </ul>

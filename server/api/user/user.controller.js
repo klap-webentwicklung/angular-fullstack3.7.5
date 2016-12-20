@@ -123,15 +123,12 @@ export function updateUser(req, res, next) {
  * update user role
  */
 export function updateUserRole(req, res, next) {
+  // grab the passed id instead of currentUser id
   var userId = String(req.body._id);
-  // var firstname = String(req.body.firstname);
-  // var name = String(req.body.name);
   var role = String(req.body.role);
 
   return User.findById(userId).exec()
     .then(user => {
-      // user.firstname = firstname;
-      // user.name = name;
       user.role = role;
       return user.save()
         .then(() => {
