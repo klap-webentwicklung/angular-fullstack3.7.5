@@ -52,6 +52,19 @@ User.find({}).remove()
       name: 'Admin',
       email: 'admin@example.com',
       password: 'admin'
+    },
+    {
+      provider: 'local',
+      role: 'guest',
+      name: 'Guest',
+      email: 'guest@example.com',
+      password: 'guest'
+    },{
+      provider: 'local',
+      role: 'auther',
+      name: 'Auther',
+      email: 'auther@example.com',
+      password: 'auther'
     })
     .then(() => {
       console.log('finished populating users');
