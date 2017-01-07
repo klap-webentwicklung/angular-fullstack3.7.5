@@ -94,6 +94,23 @@
       },
 
       /**
+       * Update user
+       */
+      updateUser(firstname, name, callback) {
+        return User.updateUser({
+            id: currentUser._id
+          }, {
+            firstname: firstname,
+            name: name
+          }, function() {
+            return safeCb(callback)(null);
+          }, function(err) {
+            return safeCb(callback)(err);
+          })
+          .$promise;
+      },
+
+      /**
        * Gets all available info on a user
        *   (synchronous|asynchronous)
        *
@@ -170,6 +187,9 @@
        */
       isAdmin() {
         return Auth.hasRole.apply(Auth, [].concat.apply(['admin'], arguments));
+      },
+      isAuther() {
+        return Auth.hasRole.apply(Auth, [].concat.apply(['auther'], arguments));
       },
 
       /**
