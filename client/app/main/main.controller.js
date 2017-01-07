@@ -14,6 +14,27 @@
       });
     }
 
+    // node mailer test
+        sendMail() {
+
+        // Send E-Mail with Node Mailer
+        this.$http.post('/api/sendmails', {
+            // method: 'POST',
+            // url: 'api/sendmail',
+            data: this.submitted
+            // statusText: 'I am sent'
+        }).then(function successCallback(response) {
+            // this callback will be called asynchronously
+            // when the response is available
+            console.log('sendEmail sucessful');
+        }, function errorCallback(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+            console.log('sendEmail not sucessful');
+        });
+
+    }
+
     $onInit() {
       this.$http.get('/api/things')
         .then(response => {
