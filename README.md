@@ -2,16 +2,20 @@
 
 ## to do:
 
-
 - Job description
+
 Implementing a reset password procedure with nodemailer: Generateing and seting a new password and send it to users mail. Message to user when mail has been sent.
 - Current progress
+
 Nodemailer ist installed and works. Function to create a password and method to save new password.
 - Existing repo link
+
 https://github.com/klap-webentwicklung/angular-fullstack3.7.5
 - Expected deliverables
+
 A working basic procedure as described
 - Deadline
+
 13/1
 
 This project was generated with [Angular Full-Stack Generator](https://github.com/DaftMonk/generator-angular-fullstack) version 3.7.5.
