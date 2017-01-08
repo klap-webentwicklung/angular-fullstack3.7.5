@@ -100,6 +100,29 @@ export function changePassword(req, res, next) {
 }
 
 /**
+ * Reset password
+ */
+export function resetPassword(req, res, next) {
+  var userId = req.user._id;
+  // var oldPass = String(req.body.oldPassword);
+  var newPass = String(req.body.newPassword);
+
+  return User.findById(userId).exec()
+    .then(user => {
+      if (user.authenticate(oldPass)) {
+        user.password = newPass;
+        return user.save()
+          .then(() => {
+            res.status(204).end();
+          })
+          .catch(validationError(res));
+      } else {
+        return res.status(403).end();
+      }
+    });
+}
+
+/**
  * update User
  */
 export function updateUser(req, res, next) {
