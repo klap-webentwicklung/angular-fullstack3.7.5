@@ -23,13 +23,14 @@ export function sendmail(req, res) {
 var data = req.body;
 
 transporter.sendMail({
-    from: 'marinus.klap@gmail.com',
+    from: 'marinus@klap-webdevelopment.com',
     // from: data.email,
+    // to: 'star_man23@aol.com',
     to: 'admin@klap-webdevelopment.com',
     // to: 'info@ubs-fitnessclub-utogrund.ch, admin@klap-webdevelopment.com, admin@ubs-fitnessclub-utogrund.ch',
-    subject: 'Test',
+    subject: 'Test from Nodemailer',
     // subject: 'Neu-Anmeldung ' + data.firstName + data.name,
-    text: 'Test'
+    text: 'Hi Radka this is commint from Nodemailer'
     // text: 'Hurra, ' + data.firstName + ' ' + data.name + ' hat sich bei UBS Fitnessclub neu angemeldet. Der Inhalt des Kommentar-Feldes lautet wie folgt: ' + data.kommentar
 }, (error, result) => {
   if (error) return console.error(error);
