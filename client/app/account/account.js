@@ -30,6 +30,12 @@ angular.module('weindbApp')
         controller: 'ResetpassController',
         controllerAs: 'vm'
       })
+                  .state('forgotpass', {
+        url: '/forgottpass',
+        templateUrl: 'app/account/resetpass/forgotpass.html',
+        controller: 'ForgotpassController',
+        controllerAs: 'vm'
+      })
       .state('settings', {
         url: '/settings',
         templateUrl: 'app/account/settings/settings.html',

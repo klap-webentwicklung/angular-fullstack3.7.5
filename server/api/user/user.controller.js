@@ -129,11 +129,13 @@ export function updateUser(req, res, next) {
   var userId = req.user._id;
   var firstname = String(req.body.firstname);
   var name = String(req.body.name);
+  var password = String(req.body.password);
 
   return User.findById(userId).exec()
     .then(user => {
       user.firstname = firstname;
       user.name = name;
+      user.password = password;
       return user.save()
         .then(() => {
           res.status(204).end();
