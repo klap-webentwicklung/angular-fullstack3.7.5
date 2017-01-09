@@ -25,24 +25,24 @@
         password
       }, callback) {
         return $http.post('/auth/local', {
-            email: email,
-            password: password
-          })
-          .then(res => {
-            $cookies.put('token', res.data.token);
-            currentUser = User.get();
-            return currentUser.$promise;
-          })
-          .then(user => {
-            safeCb(callback)(null, user);
-            return user;
-          })
-          .catch(err => {
-            Auth.logout();
-            safeCb(callback)(err.data);
-            return $q.reject(err.data);
-          });
-      },
+        email: email,
+        password: password
+      })
+      .then(res => {
+        $cookies.put('token', res.data.token);
+        currentUser = User.get();
+        return currentUser.$promise;
+      })
+      .then(user => {
+        safeCb(callback)(null, user);
+        return user;
+      })
+      .catch(err => {
+        Auth.logout();
+        safeCb(callback)(err.data);
+        return $q.reject(err.data);
+      });
+  },
 
       /**
        * Delete access token and user info
@@ -69,6 +69,47 @@
             return safeCb(callback)(err);
           })
           .$promise;
+      },
+
+      /**
+       * Send user forget password link
+       *
+       * @param  {String}   email     - user email
+       * @param  {Function} callback - optional, function(error, user)
+       * @return {Promise}
+       */
+      forgot(email, callback) {
+        return $http.post('/api/users/forgot-password', {
+          email: email
+        })
+        .then(res => {
+          safeCb(callback)(null, res);
+          return res;
+        })
+        .catch(err => {
+          safeCb(callback)(err.data);
+          return $q.reject(err.data);
+        });
+      },
+
+
+      /**
+       * Restore user password
+       *
+       * @param  {Object}   user     - user reset password info
+       * @param  {Function} callback - optional, function(error, user)
+       * @return {Promise}
+       */
+      restorePassword(user, callback) {
+        return $http.post('/api/users/reset-forgot-password', user)
+        .then(res => {
+          safeCb(callback)(null, res);
+          return res;
+        })
+        .catch(err => {
+          safeCb(callback)(err.data);
+          return $q.reject(err.data);
+        });
       },
 
       /**
