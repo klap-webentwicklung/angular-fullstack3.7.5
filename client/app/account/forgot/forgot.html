@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h1>Forgot Password</h1>
+    </div>
+    <div class="col-sm-12">
+      <form class="form" name="form" ng-submit="vm.forgot(form)" novalidate>
+
+        <div class="form-group" ng-class="{ 'has-success': form.name.$valid && vm.submitted,
+                                            'has-error': form.name.$invalid && vm.submitted }">
+          <label>Email</label>
+
+          <input type="text" name="email" class="form-control" ng-model="vm.user.email"
+                 required/>
+          <p class="help-block" ng-show="form.name.$error.required && vm.submitted">
+            A email is required
+          </p>
+        </div>
+
+        <div class="content-wrapper" ng-if="vm.submitted && vm.restored">
+          <div class="panel panel-body login-form">
+            <div class="text-center">
+              <h5 class="content-group">
+                Please check your email
+                <small class="display-block">We've sent a message with the restore link to</small>
+                <small class="display-block">{{vm.user.email}}</small>
+              </h5>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <button class="btn btn-inverse btn-lg btn-register" type="submit">
+            Forgot
+          </button>
+          <a class="btn btn-default btn-lg btn-login" ui-sref="login">
+            Login
+          </a>
+        </div>
+      </form>
+    </div>
+
+
+  </div>
+  <hr>
+</div>

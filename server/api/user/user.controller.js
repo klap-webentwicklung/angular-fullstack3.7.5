@@ -4,6 +4,8 @@ import User from './user.model';
 import passport from 'passport';
 import config from '../../config/environment';
 import jwt from 'jsonwebtoken';
+const VerificationToken = require('./verificationToken.model');
+const emailer = require('../../services/htmlEmail.service.js');
 
 function validationError(res, statusCode) {
   statusCode = statusCode || 422;
@@ -121,6 +123,85 @@ export function resetPassword(req, res, next) {
       }
     });
 }
+
+
+
+/**
+ * Send forgot password link
+ */
+export function sendForgotPassword(req, res, next) {
+  console.log(1);
+  const email = req.body.email;
+
+  if(!email) {
+    return res.status(400).json("Missing email.");
+  }
+
+  return User.findOne({
+    email: email
+  })
+  .then(user => {
+    let verificationToken = new VerificationToken({
+      userId: user._id
+    });
+    return verificationToken.createToken()
+    .then(verificationToken => {
+      // Token is stored, now send the mail
+      let emailData = {
+        user: {
+          firstName: user.firstName,
+          lastName: user.lastName
+        },
+        token: verificationToken.token
+      };
+      return emailer.restorePassword(email, emailData)
+      .catch(() => Promise.reject({email: "Error in mail service.\n Please try again later."}));
+    })
+  })
+  .then(() => res.status(200).end())
+  .catch(err => res.status(500).json(err));
+}
+
+
+/*
+ * Validates the given token and changes the password.
+ *
+ */
+export function resetForgotPassword(req, res, next) {
+  const token = req.body.token;
+  const password = req.body.password;
+  const confirmPassword = req.body.confirmPassword;
+
+  if(!token || !password || !confirmPassword) {
+    return res.status(400).json("Missing required params.");
+  }
+
+  if(password !== confirmPassword) {
+    return res.status(400).json("Passwords does not match.");
+  }
+
+  return VerificationToken.findOne({ token: token })
+  .then((verificationToken) => {
+    // Find the user for that token
+    return User.findOne({ _id: verificationToken.userId })
+    .then(user => {
+      // Change the password
+      user.password = password;
+      return user.save()
+      .then((user) => {
+        verificationToken.remove();
+        return user;
+      });
+    })
+  })
+  .then((user) => {
+    return res.status(200).json(user);
+  })
+  .catch((err) => {
+    return res.status(403).json("Token is incorrect or expired. Try to restore the password again");
+  });
+}
+
 
 /**
  * update User

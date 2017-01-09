@@ -24,6 +24,18 @@ angular.module('weindbApp')
         controller: 'SignupController',
         controllerAs: 'vm'
       })
+      .state('forgot', {
+        url: '/forgot-password',
+        templateUrl: 'app/account/forgot/forgot.html',
+        controller: 'ForgotController',
+        controllerAs: 'vm'
+      })
+      .state('restore', {
+        url: '/restore?token',
+        templateUrl: 'app/account/restore/restore.html',
+        controller: 'RestoreController',
+        controllerAs: 'vm',
+      })
       .state('settings', {
         url: '/settings',
         templateUrl: 'app/account/settings/settings.html',
