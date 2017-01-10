@@ -1,10 +1,29 @@
 # weindb
-
 This project was generated with [Angular Full-Stack Generator](https://github.com/DaftMonk/generator-angular-fullstack) version 3.7.5.
 
-## Branches:
-### extendUserModel
+###Job description
 
+Implementing a reset password procedure. Some thing like that: (feel free to suggest diffrent procedure if not acurate).
+
+1. User navigates to /forgotpass where he can enter his email, which gets verified, if ok, send mail with nodemailer and notify usser with msg on screen.
+
+2. The email contains a link, which contains a token which was genereted and which expires in some time.
+
+3. By clicking the link in the email the user gets to /resetpass, where he can set a new password, if token is valid.
+
+4. User is redirected to the login page and is notified that new password has been set and he should login with it.
+
+###Current progress
+
+Nodemailer is installed and works. Angular-UI-Bootstrap is instlled, directive "modal" has to be used for the user notifications.
+
+###Expected deliverables
+
+A working secure procedure as described with the given dependencies.
+
+###Deadline
+
+13/1
 
 ## Getting Started
 
