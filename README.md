@@ -1,7 +1,4 @@
-# weindb
-This project was generated with [Angular Full-Stack Generator](https://github.com/DaftMonk/generator-angular-fullstack) version 3.7.5.
-
-###Job description
+##Job description
 
 Implementing a reset password procedure. Some thing like that: (feel free to suggest diffrent procedure if not acurate).
 
