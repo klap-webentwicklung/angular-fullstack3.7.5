@@ -11,32 +11,79 @@
 
 import _ from 'lodash';
 import Sendmail from './sendmail.model';
+import crypto from 'crypto';
+import mongoose from 'mongoose';
 
 var nodemailer = require('nodemailer');
-var transporter = nodemailer.createTransport();
+var async = require('async');
+var User = mongoose.model('User');
+
+var transporter = nodemailer.createTransport( {
+    service:  'Mailgun',
+    auth: {
+     user: 'postmaster@mg.klap-webdevelopment.com',
+     pass: 'c47b92e00604c6be9276601983d1bf02'   
+    }
+});
 
 // Send E-Mail
-export function sendmail(req, res) {
+export function sendmail(req, res, next) {
 // export function sendmail(req, res) {
   console.log('Hallo Node Mail an KWD Admin');
 
-var data = req.body;
+  var data = req.body;
 
-transporter.sendMail({
-    from: 'marinus.klap@gmail.com',
-    // from: data.email,
-    to: 'admin@klap-webdevelopment.com',
-    // to: 'info@ubs-fitnessclub-utogrund.ch, admin@klap-webdevelopment.com, admin@ubs-fitnessclub-utogrund.ch',
-    subject: 'Test',
-    // subject: 'Neu-Anmeldung ' + data.firstName + data.name,
-    text: 'Test'
-    // text: 'Hurra, ' + data.firstName + ' ' + data.name + ' hat sich bei UBS Fitnessclub neu angemeldet. Der Inhalt des Kommentar-Feldes lautet wie folgt: ' + data.kommentar
-}, (error, result) => {
-  if (error) return console.error(error);
-  return console.log(result);
-})
+  async.waterfall([
+    function(done) {
+      crypto.randomBytes(20, function(err, buf) {
+        var token = buf.toString('hex');
+        done(err, token);
+      });
+    },
+    function(token, done) {
+      User.findOne({ email: req.body.email }, function(err, user) {
+        if (!user) {
+          return res.status(400).send({
+              message: 'No account with that email has been found'
+          });
+        }
 
-res.json(data);
+        user.resetPasswordToken = token;
+        user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+
+        user.save(function(err) {
+          done(err, token, user);
+        });
+      });
+    },
+    function(token, user, done) {
+
+      var mailOpts = {
+        from: 'test@mg.klap-webdevelopment.com',
+        to: user.email,
+        subject: 'Password Reset',
+        text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+          'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+          'http://' + req.headers.host + '/api/reset/pwd' + token + '\n\n' +
+          'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+      };
+
+      transporter.sendMail(mailOpts, function (err, response) {
+          if (err) {
+            console.log(err);
+            return res.status(404).send({message: JSON.stringify(err)});
+
+          } else {
+            console.log(response);
+            res.json({ message: 'An email has been sent to the provided email with further instructions.' });
+            done(err, 'done');
+          }
+      });
+      
+    }
+  ], function(err) {
+    if (err) return next(err);
+  });
 
 }
 

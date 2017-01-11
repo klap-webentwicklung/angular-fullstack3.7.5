@@ -4,30 +4,34 @@ class ForgotpassController {
     constructor(Auth, $state, $http) {
         this.user = {};
         this.errors = {};
+        this.success = {};
         this.submitted = false;
         this.$http = $http;
         this.Auth = Auth;
         this.$state = $state;
         this.testMsg = 'hello from node mailer';
+        this.ert = '';
     }
 
     sendMail() {
 
 
         // Send E-Mail with Node Mailer
-        this.$http.post('/api/sendmails', {
+        this.$http.post('/api/reset/forgot', {
 
-            data: this.user.email
+            email: this.user.email
 
-        }).then(function successCallback(response) {
-            // this callback will be called asynchronously
-            // when the response is available
-            console.log('sendEmail sucessful');
-        }, function errorCallback(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
-            console.log('sendEmail not sucessful');
-        });
+        }).then(() => {
+                    // Logged in, redirect to home
+                    this.success.other = 'An email has been sent to the provided email with further instructions.';
+                    this.errors.other = '';
+                    console.log("Message sent successfully!");
+                })
+                .catch(err => {
+                    this.success.other = '';
+                    this.errors.other = err.data.message;
+                    console.log("Message sent failed!");
+                });
 
     }
 
@@ -45,24 +49,6 @@ class ForgotpassController {
         }
     }
 
-
-    // login(form) {
-    //     this.submitted = true;
-
-    //     if (form.$valid) {
-    //         this.Auth.login({
-    //                 email: this.user.email,
-    //                 password: this.user.password
-    //             })
-    //             .then(() => {
-    //                 // Logged in, redirect to home
-    //                 this.$state.go('main');
-    //             })
-    //             .catch(err => {
-    //                 this.errors.other = err.message;
-    //             });
-    //     }
-    // }
 }
 
 angular.module('weindbApp')

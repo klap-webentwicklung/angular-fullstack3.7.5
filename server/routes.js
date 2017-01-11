@@ -9,9 +9,10 @@ import path from 'path';
 
 export default function(app) {
   // Insert routes below
-  app.use('/api/sendmails', require('./api/sendmail'));
+  app.use('/api/reset/', require('./api/reset'));
   app.use('/api/things', require('./api/thing'));
   app.use('/api/users', require('./api/user'));
+  // app.user('/api/reset/pwd', require('./api/reset'));
 
   app.use('/auth', require('./auth').default);
 

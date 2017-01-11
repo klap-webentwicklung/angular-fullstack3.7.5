@@ -40,7 +40,10 @@ var UserSchema = new Schema({
   facebook: {},
   twitter: {},
   google: {},
-  github: {}
+  github: {},
+    /* For reset password */
+  resetPasswordToken: String,
+  resetPasswordExpires: Date
 });
 
 /**

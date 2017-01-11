@@ -17,16 +17,16 @@
                     <p class="help-block" ng-show="form.email.$error.email && vm.submitted">
                         Please enter a valid email.
                     </p>
-                    <p class="help-block">{{ vm.errors.other }}</p>
+                    <p ng-show="vm.errors.other" class="help-block">{{ vm.errors.other }}</p>
+                    <p ng-show="vm.success.other" class="help-block">{{ vm.success.other }}</p>
                 </div>
                 <div>
                     <button class="btn btn-inverse btn-lg btn-login" type="submit">
                         Send Password Recovery Email
                     </button>
-                    <!-- <button class="btn btn-inverse btn-lg btn-login" type="button" ng-click="vm.sendMail()"> -->
-                    <!-- <button class="btn btn-inverse btn-lg btn-login" type="button" ng-click="vm.generatePassword()"> -->
+                
                 </div>
-                <hr/>
+                
             </form>
         </div>
     </div>

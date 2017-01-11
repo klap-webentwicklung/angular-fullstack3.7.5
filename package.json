@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "main": "server/app.js",
   "dependencies": {
+    "async": "^2.1.4",
     "babel-polyfill": "^6.7.2",
     "babel-runtime": "^6.6.1",
     "bluebird": "^3.3.3",
@@ -23,6 +24,7 @@
     "mongoose": "^4.1.2",
     "morgan": "~1.7.0",
     "nodemailer": "^2.7.0",
+    "nodemailer-mailgun-transport": "^1.2.4",
     "passport": "~0.3.0",
     "passport-facebook": "^2.0.0",
     "passport-google-oauth20": "^1.0.0",
