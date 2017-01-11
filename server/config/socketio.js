@@ -17,6 +17,7 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/reset/reset.socket').register(socket);
   require('../api/sendmail/sendmail.socket').register(socket);
   require('../api/thing/thing.socket').register(socket);
 

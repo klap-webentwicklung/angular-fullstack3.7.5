@@ -10,5 +10,3 @@ router.get('/:token', controller.validateResetToken);
 router.post('/:token', controller.resetPassword);
 
 module.exports = router;
-
-
