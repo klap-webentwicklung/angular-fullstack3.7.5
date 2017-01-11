@@ -10,7 +10,6 @@ class ForgotpassController {
         this.Auth = Auth;
         this.$state = $state;
         this.testMsg = 'hello from node mailer';
-        this.ert = '';
     }
 
     sendMail() {
