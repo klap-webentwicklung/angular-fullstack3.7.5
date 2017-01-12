@@ -21,8 +21,8 @@ var User = mongoose.model('User');
 var transporter = nodemailer.createTransport( {
     service:  'Mailgun',
     auth: {
-     user: 'postmaster@mg.klap-webdevelopment.com',
-     pass: 'c47b92e00604c6be9276601983d1bf02'   
+     user: 'postmaster@',
+     pass: ''   
     }
 });
 
