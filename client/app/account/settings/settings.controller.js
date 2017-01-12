@@ -1,13 +1,13 @@
 'use strict';
 
 class SettingsController {
-  errors = {};
-  submitted = false;
-
+ 
   constructor(Auth) {
     this.Auth = Auth;
     this.currentUser = Auth.getCurrentUser();
     this.user = this.currentUser;
+    this.errors = {};
+    this.submitted = false;
     console.log('Current User', this.currentUser);
   }
 
