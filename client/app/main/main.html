@@ -8,6 +8,19 @@
 
 <div class="container">
   <div class="row">
+      
+      <h1>Translations</h1>
+      <h2>From Controller</h2>
+      <p>{{ $ctrl.headline }}</p>
+      <p>On rootScope: {{ $ctrl.headlineOnRootscope }}</p>
+      <p>{{ $ctrl.paragraph }}</p>
+      <p>{{ $ctrl.namespaced_paragraph }}</p>
+      <h2>Directly in the view-layer as Filter</h2>
+      <p>{{ 'HEADLINE' | translate }}</p>
+      <p>{{ 'PARAGRAPH' | translate }}</p>
+      <h2>Directly in the view-layer as Directive</h2>
+      <p translate="HEADLINE"></p>
+      <p translate="PARAGRAPH"></p>
     <div class="col-lg-12">
       <h1 class="page-header">Features:</h1>
       <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in $ctrl.awesomeThings">
